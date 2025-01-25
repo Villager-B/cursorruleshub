@@ -10,8 +10,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'data/**'  # データファイルの変更時は実行しない
 
 # 必要な権限を設定
 permissions:
