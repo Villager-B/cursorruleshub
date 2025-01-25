@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CursorRulesHub - Cursor Configuration Reference</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/neumorphism.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>CursorRulesHub</h1>
+            <p class="subtitle">Discover and Share Cursor Configurations</p>
+            <p class="update-notice">Data is updated daily at UTC 00:00</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="filters">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search repositories..." class="neu-input">
+                </div>
+                <div class="filter-options">
+                    <select id="languageFilter" class="neu-select">
+                        <option value="">Filter by Language</option>
+                    </select>
+                    <select id="sortOption" class="neu-select">
+                        <option value="stars">Sort by Stars</option>
+                        <option value="updated">Sort by Last Updated</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="repositories" id="repositoriesList">
+                <!-- Repository cards will be dynamically added here -->
+            </div>
+
+            <div class="pagination" id="pagination">
+                <!-- Pagination controls will be dynamically added here -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 CursorRulesHub - <a href="https://github.com/shimasan0x00/cursorruleshub" target="_blank">GitHub</a></p>
+            <p class="last-update" id="lastUpdate">Last Update: Loading...</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
