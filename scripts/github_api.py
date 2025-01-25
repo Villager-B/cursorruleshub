@@ -2,7 +2,7 @@ import json
 import logging
 import os
 import time
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Dict, List
 
 from dotenv import load_dotenv
@@ -62,7 +62,7 @@ class CursorRulesCollector:
             )
 
             if remaining <= 5:  # 検索APIの制限は厳しいので、余裕を持たせる
-                wait_time = (reset_time - datetime.now()).total_seconds()
+                wait_time = (reset_time - datetime.now(UTC)).total_seconds()
                 if wait_time > 0:
                     logger.warning(
                         f"Rate limit reached. Waiting for {wait_time:.2f} seconds"
@@ -156,7 +156,7 @@ class CursorRulesCollector:
 
             # データの保存
             data = {
-                "last_updated": datetime.utcnow().isoformat(),
+                "last_updated": datetime.now(UTC).isoformat(),
                 "repositories": repos_data,
             }
 
