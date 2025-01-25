@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- 背景円 -->
+    <circle cx="256" cy="256" r="256" fill="#F5F7F6"/>
+    
+    <!-- 外側の影（ニューモーフィック効果） -->
+    <g filter="url(#outer-shadow)">
+        <!-- メインの長方形 -->
+        <rect x="96" y="176" 
+              width="320" height="160" 
+              rx="24" 
+              fill="#8bc4b1"/>
+    </g>
+    
+    <!-- 内側の影（押し込み効果） -->
+    <g filter="url(#inner-shadow)">
+        <!-- .rules テキスト -->
+        <text x="256" y="280"
+              font-family="monospace"
+              font-size="72"
+              font-weight="bold"
+              fill="#2D4B44"
+              text-anchor="middle"
+              dominant-baseline="middle">.rules</text>
+    </g>
+    
+    <!-- ハイライト効果 -->
+    <rect x="96" y="176" 
+          width="320" height="80" 
+          rx="24"
+          fill="white"
+          opacity="0.1"/>
+    
+    <!-- フィルター定義 -->
+    <defs>
+        <!-- 外側の影 -->
+        <filter id="outer-shadow" x="86" y="166" width="340" height="180"
+                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="5"/>
+            <feColorMatrix type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feColorMatrix in="SourceAlpha" type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="-4"/>
+            <feGaussianBlur stdDeviation="5"/>
+            <feColorMatrix type="matrix"
+                values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0"/>
+            <feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow" result="shape"/>
+        </filter>
+        
+        <!-- 内側の影 -->
+        <filter id="inner-shadow" x="0" y="0" width="100%" height="100%"
+                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="2"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feColorMatrix type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+        </filter>
+    </defs>
+</svg> 
