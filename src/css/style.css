@@ -1,0 +1,176 @@
+/* 基本スタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--neutral);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ヘッダー */
+.header {
+    padding: 40px 0;
+    text-align: center;
+    background: var(--primary-light);
+}
+
+.header h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: var(--dark);
+    font-size: 1.2rem;
+}
+
+/* メインコンテンツ */
+.main {
+    padding: 40px 0;
+}
+
+/* フィルター */
+.filters {
+    margin-bottom: 40px;
+}
+
+.search-box {
+    margin-bottom: 20px;
+}
+
+.filter-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-options select {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* リポジトリリスト */
+.repositories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.repository-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.repository-card h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.repository-card p {
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.repository-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.repository-language {
+    color: var(--dark);
+    font-size: 0.9rem;
+}
+
+.repository-stars {
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+/* ページネーション */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.pagination button {
+    min-width: 40px;
+}
+
+/* フッター */
+.footer {
+    padding: 20px 0;
+    text-align: center;
+    background: var(--primary-light);
+    margin-top: 40px;
+}
+
+.footer a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .repositories {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-options select {
+        width: 100%;
+    }
+}
+
+.update-notice {
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.last-update {
+    font-size: 0.8rem;
+    color: var(--dark);
+    margin-top: 10px;
+}
+
+.repository-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.repository-card .neu-button {
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
