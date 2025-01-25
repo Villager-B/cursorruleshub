@@ -3,19 +3,26 @@ name: Deploy to GitHub Pages
 on:
   # 24時間ごとの実行
   schedule:
-    - cron: '30 0 * * *'  # UTC 00:30に実行（データ更新の30分後）
+    - cron: '30 0 * * *'  # UTC 00:30に実行
   # 手動実行用
   workflow_dispatch:
   # mainブランチへのプッシュ時
   push:
     branches:
       - main
+    paths-ignore:
+      - 'data/**'  # データファイルの変更時は実行しない
 
 # 必要な権限を設定
 permissions:
   contents: write
   pages: write
   id-token: write
+
+# 同時実行を防止
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   update-and-deploy:
@@ -25,12 +32,16 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
+        cache: 'pip'
 
     - name: Install dependencies
       run: |
@@ -40,17 +51,46 @@ jobs:
     - name: Update data
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ERROR_LOG_LEVEL: "INFO"
       run: |
+        echo "Starting data collection..."
         python scripts/github_api.py
+      continue-on-error: false
+
+    - name: Verify data directory and files
+      run: |
+        if [ ! -d "data" ]; then
+          echo "Error: Data directory not found"
+          exit 1
+        fi
+        if [ ! -f "data/cursorrules_data.json" ]; then
+          echo "Error: cursorrules_data.json not found"
+          exit 1
+        fi
+        echo "Data directory contents:"
+        ls -la data/
+        echo "Verifying JSON file..."
+        python -c "import json; json.load(open('data/cursorrules_data.json'))"
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
 
-    - name: Copy files to deployment directory
+    - name: Prepare deployment directory
       run: |
         mkdir -p dist
-        cp -r src/* dist/
+        # srcディレクトリの内容をコピー
+        if [ -d "src" ]; then
+          cp -r src/* dist/
+        else
+          echo "Error: src directory not found"
+          exit 1
+        fi
+        # dataディレクトリをコピー
         cp -r data dist/
+        echo "Deployment directory structure:"
+        ls -la dist/
+        echo "Data directory contents:"
+        ls -la dist/data/
         
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
