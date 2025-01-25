@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   # 24時間ごとの実行
   schedule:
-    - cron: '0 0 * * *'  # UTC 00:00に実行
+    - cron: '30 0 * * *'  # UTC 00:30に実行（データ更新の30分後）
   # 手動実行用
   workflow_dispatch:
   # mainブランチへのプッシュ時
