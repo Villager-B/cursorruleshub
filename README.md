@@ -2,11 +2,11 @@
 
 [![Visit CursorRulesHub](https://img.shields.io/badge/Visit-CursorRulesHub-8bc4b1?style=for-the-badge)](https://villager-b.github.io/cursorruleshub/)
 
-A platform for discovering and sharing Cursor's `.cursorrules` configurations. Browse through various settings from other developers and customize your Cursor editor efficiently.
+A platform for browsing Cursor's `.cursorrules` configurations from GitHub repositories. Explore various settings from other developers and find inspiration for your Cursor editor customization.
 
 ## 🌟 Features
 
-- Search for `.cursorrules` files from public GitHub repositories
+- Browse `.cursorrules` files from public GitHub repositories
 - Sort and filter repositories by stars and primary language
 - Modern and simple UI with neumorphism design
 - Daily updates of repository data
