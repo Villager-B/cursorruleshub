@@ -1,30 +1,44 @@
 # CursorRulesHub
 
-Cursorの`.cursorrules`ファイルを検索・参照できるプラットフォームです。他の開発者の設定を参考にして、効率的にCursorの設定をカスタマイズすることができます。
+[![Visit CursorRulesHub](https://img.shields.io/badge/Visit-CursorRulesHub-8bc4b1?style=for-the-badge)](https://villager-b.github.io/cursorruleshub/)
 
-## 機能
+A platform for discovering and sharing Cursor's `.cursorrules` configurations. Browse through various settings from other developers and customize your Cursor editor efficiently.
 
-- GitHubの公開リポジトリから`.cursorrules`ファイルを検索
-- リポジトリのスター数や主要言語でのソート・フィルタリング
-- モダンでシンプルなUI（ニューモーフィズムデザイン）
+## 🌟 Features
 
-## 開発環境のセットアップ
+- Search for `.cursorrules` files from public GitHub repositories
+- Sort and filter repositories by stars and primary language
+- Modern and simple UI with neumorphism design
+- Daily updates of repository data
+
+## 🚀 Quick Start
+
+Visit [CursorRulesHub](https://villager-b.github.io/cursorruleshub/) to start exploring Cursor configurations.
+
+## 🛠 Development Setup
 
 ```bash
-# 仮想環境の作成と有効化
+# Create and activate virtual environment
 python -m venv venv
-source venv/bin/activate  # Linuxの場合
-.\venv\Scripts\activate   # Windowsの場合
+source venv/bin/activate  # For Linux/macOS
+.\venv\Scripts\activate   # For Windows
 
-# 依存パッケージのインストール
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-## データ更新
+## 🔄 Data Updates
 
-- GitHub Actionsにより24時間ごとに自動でデータが更新されます
-- 収集されたデータは`data/`ディレクトリに保存されます
+- Data is automatically updated every 24 hours via GitHub Actions
+- Collected data is stored in the `data/` directory
+- Updates occur at UTC 00:00
 
-## ライセンス
+## 📝 License
 
-MIT License - 詳細は[LICENSE](LICENSE)ファイルを参照してください。 
+MIT License - See [LICENSE](LICENSE) file for details.
+
+## 🔗 Links
+
+- [CursorRulesHub Website](https://villager-b.github.io/cursorruleshub/)
+- [Cursor Editor](https://cursor.sh/)
+- [About .cursorrules](https://cursor.sh/docs/cursorrules) 
