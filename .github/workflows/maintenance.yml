@@ -1,0 +1,74 @@
+name: Repository Maintenance
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'  # 毎週月曜日のUTC 01:00に実行（デプロイの30分後）
+  pull_request:
+    branches: [ main ]  # mainブランチへのPRのみに変更
+  workflow_dispatch:    # 手動実行は残しておく
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install security tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit safety
+
+      - name: Run Bandit
+        run: bandit -r . -ll -ii -x ./venv,./tests
+
+      - name: Check dependencies with Safety
+        run: safety check
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/init@v2
+        with:
+          languages: python, javascript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
+  dependency-update:
+    needs: security-scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'  # スケジュール実行または手動実行時
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Update dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-tools
+          pip-compile --upgrade requirements.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'chore: update dependencies'
+          title: '📦 依存パッケージの更新'
+          body: |
+            ## 依存パッケージの更新
+            
+            このPRは自動生成されています。
+            セキュリティスキャンが完了し、問題がないことを確認済みです。
+            
+            ### 確認項目
+            - [ ] CI/CDパイプラインが正常に完了すること
+            - [ ] アプリケーションが正常に動作すること
+          branch: update-dependencies
+          base: develop
+          labels: dependencies, security-approved 

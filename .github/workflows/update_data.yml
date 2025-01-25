@@ -2,7 +2,7 @@ name: Update CursorRules Data
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 毎日UTC 00:00に実行
+    - cron: '0 0 * * *'  # 毎日UTC 00:00に実行（データ更新を最初に実行）
   workflow_dispatch:      # 手動実行も可能
 
 jobs:
