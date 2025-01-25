@@ -5,11 +5,6 @@ import time
 from datetime import datetime
 from typing import Dict, List
 
-from config import (
-    CURSORRULES_DATA_FILE,
-    DATA_DIR,
-    GITHUB_TOKEN,
-)
 from dotenv import load_dotenv
 from github import Github, GithubException
 from github.Repository import Repository
@@ -17,6 +12,15 @@ from tqdm import tqdm
 
 # 環境変数の読み込み
 load_dotenv()
+
+# 基本設定
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+if not GITHUB_TOKEN:
+    raise ValueError("GitHub Token is not set in .env file")
+
+# データ保存設定
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+CURSORRULES_DATA_FILE = os.path.join(DATA_DIR, "cursorrules_data.json")
 
 # ロガーの設定
 logging.basicConfig(
@@ -35,9 +39,6 @@ SEARCH_QUERIES = [
 
 class CursorRulesCollector:
     def __init__(self):
-        if not GITHUB_TOKEN:
-            raise ValueError("GitHub Token is not set")
-
         self.token = GITHUB_TOKEN
         self.api_url = os.getenv("GITHUB_API_URL", "https://api.github.com")
         self.github = Github(self.token)
