@@ -41,4 +41,3 @@ MIT License - See [LICENSE](LICENSE) file for details.
 
 - [CursorRulesHub Website](https://villager-b.github.io/cursorruleshub/)
 - [Cursor Editor](https://cursor.sh/)
-- [About .cursorrules](https://cursor.sh/docs/cursorrules) 
