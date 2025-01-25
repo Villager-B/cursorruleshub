@@ -11,11 +11,18 @@ on:
     branches:
       - main
 
+# 必要な権限を設定
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   update-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
     - uses: actions/checkout@v4
